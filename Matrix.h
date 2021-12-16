@@ -23,7 +23,7 @@ double** productMatrix(double** A, double** B, size_t rowsA, size_t colsA, size_
 void numProdMatrix(double** A, size_t rows, size_t cols, double num);
 double& maximumMatrix(double** matrix, size_t rows, size_t cols);
 double& minmaxMatrix(double** M, size_t rows, size_t columns);
-double& localMinimum(double** A, size_t row, size_t columns);
+void localMinimum(double** A, size_t row, size_t columns);
 void mixMatrix(double** M, size_t rows, size_t columns, size_t K_1, size_t K_2);
 double** minor(double** matrix, size_t size ,size_t fixedRow, size_t fixedCol);
 double determinant(double** matrix, size_t size);
