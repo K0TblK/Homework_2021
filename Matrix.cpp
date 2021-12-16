@@ -204,7 +204,7 @@ double** minor(double** matrix, size_t size, size_t fixedRow, size_t fixedCol) {
 	}
 	return temp;
 };
-double& localMinimum(double** A, size_t row, size_t columns) {
+void localMinimum(double** A, size_t row, size_t columns) {
 	double local_min = A[row][0];
 	size_t c_min = 0;
 	for (size_t c = 0; c < columns; c++)
@@ -214,7 +214,7 @@ double& localMinimum(double** A, size_t row, size_t columns) {
 			c_min = c;
 		}
 	}
-	return A[row][c_min];
+	A[row][c_min]=0;
 };
 double determinant(double** matrix, size_t size)
 {
