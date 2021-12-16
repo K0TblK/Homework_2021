@@ -1,5 +1,7 @@
 #include "Matrix.h"
+#include <fstream>
 #include <iostream>
+#include <stdexcept>
 double** createMatrix(size_t rows, size_t cols) {
 	double** matrix = new double* [rows];
 	for (size_t idx = 0; idx<rows; ++idx){
@@ -30,6 +32,21 @@ void inputMatrix(double** matrix, size_t rows, size_t cols) {
 			std::cin >> matrix[i][j];
 		}
 	}
+}
+double** inputFileMatrix(char const* filename, size_t& rows, size_t& cols)
+{
+	std::ifstream in(filename);
+	if (!in.is_open()) 
+		throw std::runtime_error("Failed to open matrix file");
+	in >> rows >> cols;
+	double** matrix = createMatrix(rows, cols);
+	for (size_t r = 0; r < rows; ++r) {
+		for (size_t c = 0; c < cols; ++c) {
+			in >> matrix[r][c];
+		}
+	}
+	in.close();
+	return matrix;
 }
 void fillMatrix(double** matrix, size_t rows, size_t cols,double n) {
 	for (size_t i = 0; i < rows; ++i) {
@@ -112,6 +129,14 @@ double** productMatrix(double** A, double** B, size_t rowsA, size_t colsA, size_
 	}
 	return product;
 }
+void numProdMatrix(double** A, size_t rows, size_t cols, double num)
+{
+	for (size_t r = 0; r < rows; ++r) {
+		for (size_t c = 0; c < cols; ++c) {
+			A[r][c] *= num;
+		}
+	}
+}
 double& maximumMatrix(double** matrix, size_t rows, size_t cols) {
 	size_t r_max = 0;
 	size_t c_max = 0;
@@ -147,21 +172,50 @@ double& minmaxMatrix(double** matrix, size_t rows, size_t cols) {
 	return *mins[max];
 
 };
+
 void mixMatrix(double** matrix, size_t rows, size_t cols, size_t K_1, size_t K_2) {
+	if (K_1 == K_2)
+		return;
+	if (K_1 <= rows || K_1 <= cols || K_2 <= rows || K_2 <= cols) {
 		//Swap rows
-		for (size_t c = 0; c < cols; ++c) {
-			double tmp = matrix[K_1-1][c];
-			matrix[K_1-1][c] = matrix[K_2-1][c];
-			matrix[K_2-1][c] = tmp;
-		}
+		swap(matrix[K_1], matrix[K_2]);
 		//Swap columns
 		for (size_t r = 0; r < rows; ++r) {
-			double tmp = matrix[r][K_1-1];
-			matrix[r][K_1-1] = matrix[r][K_2-1];
-			matrix[r][K_2-1] = tmp;
+			swap(matrix[r][K_1], matrix[r][K_2]);
 		}
+	}
 		
 }
+double** minor(double** matrix, size_t size, size_t fixedRow, size_t fixedCol) { // Delete temp after calling this
+	double** temp = createMatrix(size - 1, size - 1);
+	size_t r = 0, c = 0;
+	for (size_t row = 0; row < size; ++row) {
+		for (size_t col = 0; col < size; ++col){
+			//Check if current column and row are not equal to the fixed ones
+			if (col != fixedCol and row != fixedRow) {
+					temp[r][c] = matrix[row][col];
+					++c;
+				}
+			if (c == size - 1) {
+				c = 0;
+				++r;
+			}
+		}
+	}
+	return temp;
+};
+double& localMinimum(double** A, size_t row, size_t columns) {
+	double local_min = A[row][0];
+	size_t c_min = 0;
+	for (size_t c = 0; c < columns; c++)
+	{
+		if (local_min > A[row][c]) {
+			local_min = A[row][c];
+			c_min = c;
+		}
+	}
+	return A[row][c_min];
+};
 double determinant(double** matrix, size_t size)
 {
 	double det = 0;
@@ -178,26 +232,36 @@ double determinant(double** matrix, size_t size)
 		size_t fixedCol = 0;
 		int sign = 1;
 		for (size_t repeats = 1; repeats <= size; ++repeats) {
-			double** temp = createMatrix(size - 1, size - 1);
-			size_t col = 0;
-			for (size_t idx = 0; idx < size; ++idx) {
-				//Check if current column is not equal to the fixed one
-				if (idx != fixedCol) {
-					//if true fill the temp matrix's column
-					for (size_t r = 0; r < size - 1; ++r) {
-						temp[r][col] = matrix[r + 1][idx];
-					}
-					++col;
-				}
-			}
-			det += sign*matrix[0][fixedCol]*determinant(temp, size - 1);
+			double** algMinor = minor(matrix, size, 0, fixedCol);
+			det += sign * matrix[0][fixedCol] * determinant(algMinor, size - 1);
 			++fixedCol;
 			sign *= -1;
-			deleteMatrix(temp, size - 1, size - 1);
+			deleteMatrix(algMinor, size - 1, size - 1);
 		}
 
 	}
-	
+
 	return det;
-}
-;
+};
+double** inv(double** M, size_t size)
+{
+	if (determinant(M, size) == 0) {
+		std::cout << "Inverse Matrix does not exist" << "\n";
+		return M;
+	}
+	double det = determinant(M, size);
+	double** minors = createMatrix(size, size);
+	int sign = 1;
+	for (size_t row = 0; row < size; ++row) {
+		for (size_t col = 0; col < size; ++col) {
+			double** currMinor = createMatrix(size-1, size-1);
+			currMinor = minor(M, size, row, col);
+			minors[row][col] = sign * determinant(currMinor, size-1);
+			sign *= -1;
+			deleteMatrix(currMinor, size - 1, size - 1);
+		}
+	};
+	minors = transpose(minors, size, size);
+	numProdMatrix(minors, size, size, (1 / det));
+	return minors;
+};
