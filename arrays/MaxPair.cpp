@@ -2,7 +2,8 @@
 
 int main() {
     int n;
-    int A[1000];
+    int A[999];
+    std::cout << "Input size of an array: " <<"\n";
     std::cin >> n;
     for (int i = 0; i < n; ++i) {
         std::cin >> A[i];
