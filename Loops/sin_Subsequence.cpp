@@ -1,4 +1,5 @@
 #include<iostream>
+#include<cmath>
 int main(){
 	double xmin, xmax, dx, eps;
 	std::cout << "Input xmin, xmax, dx and epsilon: ";
