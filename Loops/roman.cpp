@@ -1,4 +1,5 @@
-//------Thirteenth task
+#include<iostream>
+int main(){
 	int num;
 	do {
 		std::cout << "Input integer [0, 4000]: " << "\n";
@@ -57,3 +58,4 @@
         num-=1;
     }
 	return(0);
+}
