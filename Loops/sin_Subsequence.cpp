@@ -1,4 +1,5 @@
-//--------Fifth task
+#include<iostream>
+int main(){
 	double xmin, xmax, dx, eps;
 	std::cout << "Input xmin, xmax, dx and epsilon: ";
 	std::cin >> xmin >> xmax >> dx >> eps;
@@ -16,3 +17,4 @@
 		std::cout << "x = " << xmin << "; sin(x) = " << sin(xmin) << "; fx=: " << fx  << "\n";
 	}
 	return (0);
+}
