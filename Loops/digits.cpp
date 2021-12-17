@@ -1,4 +1,5 @@
-//----------Eighth task
+#include<iostream>
+int main(){
 	int num, sum=0, prod=1;
 	std::cout << "Input integer: ";
 	std::cin >> num;
@@ -10,3 +11,4 @@
 	}
 	std::cout << "\n" << "Summary of digits: " << sum << "; Product of digits: " << prod << "\n";
 	return(0);
+}
