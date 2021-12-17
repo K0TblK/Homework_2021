@@ -1,4 +1,5 @@
-//--------Nineth task
+#include<iostream>
+int main(){
 	int num,deg=1;
 	std::cout << "Input integer: ";
 	std::cin >> num;
@@ -15,3 +16,4 @@
 		deg /= 2;
 	}
 	return(0);
+}
