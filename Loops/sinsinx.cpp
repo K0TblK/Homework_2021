@@ -1,4 +1,6 @@
-//--------Third task
+#include<iostream>
+#include<cmath>
+int main(){
 	int n;
 	double x, sum=0;
 	std::cout << "Input amount of elements: ";
@@ -11,3 +13,4 @@
 	}
 	std::cout << "Summary of subsequence: " << sum << "\n";
 	return(0);
+}
