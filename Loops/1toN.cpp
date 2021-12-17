@@ -1,6 +1,5 @@
 #include<iostream>
 int main(){
-//--------First task
 	int n;
 	double sum = 1;
 	std::cout << "input n: ";
