@@ -1,4 +1,5 @@
-//-----Sixth task
+#include<iostream>
+int main(){
 	int n, counter=0, vertex=0;
 	std::cout << "Input integer: ";
 	std::cin >> n;
@@ -15,3 +16,4 @@
 	}
 	std::cout << "\n" << "Amount of steps:  " << counter << "  Vertex:  " << vertex;
 	return (0);
+}
