@@ -1,3 +1,5 @@
+#include <iostream>
+int main(){
 //-------Tenth task
 	int num;
 	std::cout << "Input integer: ";
@@ -19,3 +21,4 @@
 		two_deg >>= 4;
 	}
 	return(0);
+}
