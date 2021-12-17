@@ -1,6 +1,5 @@
 #include<iostream>
 int main(){
-//-----------Second task
 	int n, deg = 1; 
 	double sum = 0;
 	std::cout << "Input max degree: ";
