@@ -1,3 +1,5 @@
+#include<iostream>
+int main(){
 //-----------Second task
 	int n, deg = 1; 
 	double sum = 0;
@@ -10,3 +12,4 @@
 	std::cout << "\n" << "Summary of subsequence: " << sum << "\n";
 	system("pause");
 	return(0);
+}
