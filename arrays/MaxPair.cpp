@@ -3,10 +3,12 @@
 int main() {
     int n;
     int A[999];
+    int temp;
     std::cout << "Input size of an array: " <<"\n";
     std::cin >> n;
     for (int i = 0; i < n; ++i) {
-        std::cin >> A[i];
+        std::cin >> temp;
+        A[i] = temp;
     }
     int Max = 0;
     int idxMax = 0;
