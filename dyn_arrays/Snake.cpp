@@ -76,6 +76,6 @@ int main() {
     for (size_t i=0; i<n; ++i){
         delete[] Matrix[m];   
     }
-    delete[] Matrix
+    delete[] Matrix;
     return 0;
 }
