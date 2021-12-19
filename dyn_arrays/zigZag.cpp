@@ -104,4 +104,9 @@ int main() {
 		}
 		std::cout << "\n";
 	}
+	for (size_t r = 0; r < rows; ++r) {
+		delete[] Matrix[r];
+	}
+	delete[] Matrix;
+	return 0;
 }
