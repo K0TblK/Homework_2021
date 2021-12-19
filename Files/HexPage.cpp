@@ -1,7 +1,6 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include <iomanip>
 std::string decToHex(int num) {
 	std::string str;
 	int temp_deg = num;
@@ -12,10 +11,10 @@ std::string decToHex(int num) {
 	while (big_deg > 0) {
 		int mod = num / big_deg;
 		if (mod > 9) {
-			str+= (char)(mod + 55);
+			str += (char)(mod + 55);
 		}
 		else
-			str+= (char)(mod+48);
+			str += (char)(mod + 48);
 		num %= big_deg;
 		big_deg >>= 4;
 	}
@@ -36,17 +35,17 @@ int main() {
 	char* buffer = new char[length];
 	fin.read(buffer, length);
 	//Variables for creating the line that keeps track of shift from the beginning of file
-	size_t lineNumber=0;
+	size_t lineNumber = 0;
 	for (int i = 0; i < 10; ++i) {
 		std::cout << '0';
 	}
 	std::cout << ": ";
-	for (size_t idx=0; idx<=length; ++idx){
+	for (size_t idx = 0; idx <= length; ++idx) {
 
 		//cout elements in human language if reached the eof
 		if (idx == length) {
 			int diff = 16 - counter;
-			for (size_t spaces=0; spaces<diff; ++spaces){
+			for (size_t spaces = 0; spaces < diff; ++spaces) {
 				std::cout << "   ";
 			}
 			for (size_t c = idx - counter; c < idx; ++c) {
@@ -62,7 +61,7 @@ int main() {
 				temp = 46;
 			}
 			//Convert from decimal to hex
-			std::string currSymbol=decToHex(temp);
+			std::string currSymbol = decToHex(temp);
 			for (size_t i = 0; i < currSymbol.length(); ++i) {
 				std::cout << currSymbol[i];
 			}
@@ -85,7 +84,7 @@ int main() {
 				}
 				std::cout << "\n";
 				//Check the shift from beginning of the file
-				std::string hexLineNumber=decToHex(lineNumber);
+				std::string hexLineNumber = decToHex(lineNumber);
 				int diff = 9 - (int)hexLineNumber.length();
 				for (size_t i = 0; i < diff; ++i) {
 					std::cout << 0;
