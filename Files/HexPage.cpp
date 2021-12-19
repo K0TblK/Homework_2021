@@ -44,7 +44,7 @@ int main() {
 
 		//cout elements in human language if reached the eof
 		if (idx == length) {
-			int diff = 16 - counter;
+			int diff = 15 - counter+1;
 			for (size_t spaces = 0; spaces < diff; ++spaces) {
 				std::cout << "   ";
 			}
