@@ -2,7 +2,7 @@
 #include "ImgFunctions.h"
 #include <iostream>
 int main() {
-    RGB background = { 255, 255, 255};
+    RGB background = { 255, 255, 255 };
     RGB red = { 0, 0, 255 };
     RGB orange = { 0, 128, 255 };
     RGB yellow = { 0, 255 , 255 };
@@ -12,7 +12,7 @@ int main() {
     RGB violet = { 255, 0 , 128 };
     try
     {
-        
+
         RgbImg img = createRgbImg(100, 700, background);
         for (size_t row = 0; row < 100; ++row)
             for (size_t col = 0; col < 100; ++col)
@@ -50,6 +50,7 @@ int main() {
                 img.pixels[row][col] = violet;
             }
         writeRgbImg("RainbowSix.bmp", img);
+        deleteRgbImg(img);
     }
     catch (std::exception const& e)
     {
